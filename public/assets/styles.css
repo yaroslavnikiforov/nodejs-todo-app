@@ -4,25 +4,28 @@ body {
     color: #989898;
 }
 
-#todo-table {
-    position: relative;
+h1 {
     width: 95%;
-    background: #090d13;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
-#todo-table form:after {
-    margin: 0;
-    content: "";
-    display: block;
-    clear: both;
+#todo-table {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #090d13;
 }
 
 input[type="text"] {
     width: 70%;
     padding: 20px;
+    box-sizing: border-box;
     background: #181c22;
     border: 0;
     float: left;
@@ -31,21 +34,20 @@ input[type="text"] {
 }
 
 button {
-    padding: 20px;
     width: 30%;
-    float: left;
-    background: #23282e;
-    border: 0;
+    padding: 20px;
     box-sizing: border-box;
+    border: 0;
+    background: #23282e;
     color: #fff;
-    cursor: pointer;
     font-size: 20px;
+    cursor: pointer;
 }
 
 ul {
-    list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 20px 0 0;
+    list-style-type: none;
 }
 
 li {
@@ -61,10 +63,4 @@ li {
 li:hover {
     text-decoration: line-through;
     background: rgba(0, 0, 0, 0.2);
-}
-
-h1 {
-    background: url(/logo.png) no-repeat center;
-    margin-bottom: 0;
-    text-indent: -10000px;
 }
