@@ -19,37 +19,37 @@ module.exports = function todoController(app) {
 
   const Todo = mongoose.model("Todo", todoSchema);
 
-  const itemOne = Todo({ item: "buy flowers" }).save(err => {
-    if (err) {
-      throw err;
-    } else {
-      console.log("item saved");
-    }
-  });
-
-  let data = [
-    { item: "get milk" },
-    { item: "walk dog" },
-    { item: "kick some coding ass" }
-  ];
-
   const urlencoder = bodyParser.urlencoded({ extended: false });
 
   app.get("/todo", (req, res) => {
-    res.render("todo", { todos: data });
+    Todo.find({}, (err, data) => {
+      if (err) {
+        throw err;
+      } else {
+        res.render("todo", { todos: data });
+      }
+    });
   });
 
   app.post("/todo", urlencoder, (req, res) => {
-    data.push(req.body);
-
-    res.json(data);
+    const newTodo = Todo(req.body).save((err, data) => {
+      if (err) {
+        throw err;
+      } else {
+        res.json(data);
+      }
+    });
   });
 
   app.delete("/todo/:item", (req, res) => {
-    data = data.filter(
-      todo => todo.item.replace(/ /g, "-") !== req.params.item
+    Todo.find({ item: req.params.item.replace(/\-/g, " ") }).remove(
+      (err, data) => {
+        if (err) {
+          throw err;
+        } else {
+          res.json(data);
+        }
+      }
     );
-
-    res.json(data);
   });
 };
